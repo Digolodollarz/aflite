@@ -1,0 +1,37 @@
+<div class="login-page">
+  <div class="" fxLayout="row" fxLayoutAlign="center">
+    <mat-card class="login-container"
+              fxLayout="row"
+              fxLayout.xs="column"
+              fxLayoutWrap
+              fxLayoutGap="0.5%"
+              fxLayoutAlign="center center"
+              fxFlex>
+      <div fxFlex="60%" class="background-primary"
+           fxFlexFill fxLayout="column">
+        <div fxFlex="100%" class="background-primary color-accent dgl-p-16">
+          <h1>Welcome to Africalight Foundation</h1>
+          <h2>Bring dreams to life</h2>
+        </div>
+      </div>
+      <div fxFlex="40%" class="login-form-container">
+        <h2 class="color-accent">Login</h2>
+        <form #loginForm="ngForm" class="form-container">
+          <mat-form-field>
+            <input matInput placeholder="Username"
+                   [(ngModel)]="user.username" name="user.username">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Password" type="password"
+                   [(ngModel)]="user.password" name="user.password">
+          </mat-form-field>
+
+          <button mat-raised-button color="accent" (click)="login()">Login</button>
+
+          <button mat-button color="primary">No account? Register</button>
+          <span class="color-warn">{{error?.message}}</span>
+        </form>
+      </div>
+    </mat-card>
+  </div>
+</div>

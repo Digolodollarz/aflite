@@ -27,6 +27,8 @@ $aflite-theme: mat-light-theme($aflite-primary, $aflite-accent, $aflite-warn);
 
 /* You can add global styles to this file, and also import other style files */
 
+@import "app/dgl-commons";
+
 html, body {
   height: 100%;
 }
@@ -35,11 +37,48 @@ body {
   margin: 0;
   font-family: Open Sans Condensed, "Helvetica Neue", sans-serif;
 
-  h1,h2,h3,h4,h5,h6{
+  h1, h2, h3, h4, h5, h6 {
     font-family: Nunito, "Helvetica Neue", sans-serif;
   }
+}
+
+//Theming the application. Sometimes I thing material is really stupid. If only
+//bootstrap had better angular support I wouldn't have to deal with this mess...
+
+.background-primary {
+  background-color: mat-color($aflite-primary);
+  color: #ffffff;
+}
+
+.background-accent {
+  background-color: mat-color($aflite-accent);
+  color: #ffffff;
+}
+
+.background-warn {
+  background-color: mat-color($aflite-warn);
+  color: #ffffff;
+}
+
+.color-primary {
+  color: mat-color($aflite-primary);
+}
+
+.color-accent {
+  color: mat-color($aflite-accent);
+}
+
+.color-warn {
+  color: mat-color($aflite-warn);
 }
 
 .dgl-expanded {
   flex: 1 1 auto;
 }
+
+/* <app-root></app-root> */
+app-root {
+  min-height: 100%;
+}
+
+

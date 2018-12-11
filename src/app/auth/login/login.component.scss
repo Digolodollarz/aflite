@@ -1,0 +1,24 @@
+.login-page {
+  height: calc(100% - 64px);
+}
+
+.login-container {
+  max-width: 680px;
+  height: 480px;
+}
+
+.login-form-container{
+  padding: 16px;
+}
+
+.form-container {
+  width: 100%;
+
+  * {
+    width: 100%;
+  }
+}
+
+.mat-card {
+  padding: 0;
+}
