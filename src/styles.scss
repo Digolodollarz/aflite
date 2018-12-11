@@ -60,6 +60,16 @@ body {
   color: #ffffff;
 }
 
+.bg-light {
+  background-color: #eeeeee;
+  color: #111111;
+}
+
+.bg-dark {
+  background-color: #111111;
+  color: #eeeeee;
+}
+
 .color-primary {
   color: mat-color($aflite-primary);
 }
@@ -72,6 +82,14 @@ body {
   color: mat-color($aflite-warn);
 }
 
+.color-light {
+  color: #ffffff;
+}
+
+.color-dark {
+  color: #000;
+}
+
 .dgl-expanded {
   flex: 1 1 auto;
 }
@@ -80,5 +98,25 @@ body {
 app-root {
   min-height: 100%;
 }
+
+.contain{
+  max-width: 960px;
+}
+
+.page-container {
+  height: calc(100% - 64px);
+}
+
+.header {
+  height: 360px;
+  background-position: center;
+  background-size: cover;
+}
+
+.text-center {
+  text-align: center;
+}
+
+
 
 

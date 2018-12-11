@@ -10,10 +10,12 @@ import {AuthModule} from './auth/auth.module';
 import {fakeBackendProvider} from './_helpers/fack-backend';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {ErrorInterceptor} from './_helpers/error-interceptor';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
