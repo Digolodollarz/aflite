@@ -11,6 +11,8 @@ import {fakeBackendProvider} from './_helpers/fack-backend';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {ErrorInterceptor} from './_helpers/error-interceptor';
 import { HomeComponent } from './home/home.component';
+import {InfoModule} from './info/info.module';
+import {MDBBootstrapModule} from 'angular-bootstrap-md';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { HomeComponent } from './home/home.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     ImportsModule,
+    MDBBootstrapModule.forRoot(),
     AuthModule,
+    InfoModule,
   ],
   providers: [fakeBackendProvider,
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}],

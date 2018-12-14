@@ -6,13 +6,14 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {AuthService} from './auth.service';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {JwtInterceptor} from './jwt-interceptor';
+import {MDBBootstrapModule, MDBRootModule} from 'angular-bootstrap-md';
 
 @NgModule({
   declarations: [LoginComponent],
   imports: [
     CommonModule,
     ImportsModule,
-    FlexLayoutModule,
+    MDBBootstrapModule.forRoot(),
   ],
   providers: [AuthService,
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}]
