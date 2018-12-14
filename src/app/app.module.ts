@@ -20,7 +20,7 @@ import {MDBBootstrapModule} from 'angular-bootstrap-md';
     HomeComponent,
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     BrowserAnimationsModule,
     ImportsModule,
