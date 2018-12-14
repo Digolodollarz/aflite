@@ -10,7 +10,8 @@
       <a class="nav-item nav-link active waves-light" href="#" mdbWavesEffect>Home <span
         class="sr-only">(current)</span></a>
       <a class="nav-item nav-link waves-light" href="#" mdbWavesEffect>Features</a>
-      <a class="nav-item nav-link waves-light" href="login" mdbWavesEffect>Login</a>
+      <a class="nav-item nav-link waves-light" *ngIf="!user" href="login" mdbWavesEffect>Login</a>
+      <a class="nav-item nav-link waves-light" *ngIf="user" (click)="logout()" mdbWavesEffect>Log out</a>
       <a class="nav-item nav-link disabled" href="#">Disabled</a>
     </div>
   </links>
@@ -63,7 +64,8 @@
             <a href="#!">Artists</a>
           </li>
           <li>
-            <a href="/login">Login</a>
+            <a *ngIf="user == null" href="/login">Login</a>
+            <a *ngIf="user != null" (click)="logout()">Log out</a>
           </li>
         </ul>
 

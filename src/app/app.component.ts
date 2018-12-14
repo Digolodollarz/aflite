@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AuthService} from './auth/auth.service';
 import {User} from './auth/user';
 import {Router} from '@angular/router';
+import {log} from 'util';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,11 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.authService.currentUser.subscribe(_user => this.user = _user);
+    console.log(this.authService.currentUser);
+    this.authService.currentUser.subscribe(_user => {
+      this.user = _user;
+      console.log(_user);
+    });
   }
 
   logout() {

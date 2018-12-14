@@ -1,9 +1,10 @@
-import { Injectable } from '@angular/core';
+import {Inject, Injectable, PLATFORM_ID} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {BehaviorSubject, config, Observable} from 'rxjs';
+import {BehaviorSubject, config, observable, Observable} from 'rxjs';
 import { map } from 'rxjs/operators';
 import {User} from './user';
 import {Config} from '../config';
+import {isPlatformBrowser} from '@angular/common';
 @Injectable({
   providedIn: 'root'
 })
@@ -12,9 +13,14 @@ export class AuthService {
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
 
-  constructor(private http: HttpClient) {
-    this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
-    this.currentUser = this.currentUserSubject.asObservable();
+  constructor(private http: HttpClient,
+              @Inject(PLATFORM_ID) private platformId: Object) {
+    if (isPlatformBrowser(this.platformId)) {
+      this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
+      this.currentUser = this.currentUserSubject.asObservable();
+    } else {
+      this.currentUser = new BehaviorSubject<User>(null);
+    }
   }
 
   public get currentUserValue(): User {
