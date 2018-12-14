@@ -14,12 +14,14 @@ import { HomeComponent } from './home/home.component';
 import {InfoModule} from './info/info.module';
 import {MDBBootstrapModule} from 'angular-bootstrap-md';
 import { ProfileComponent } from './profile/profile.component';
+import { ArtistComponent } from './profile/artist/artist.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     ProfileComponent,
+    ArtistComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

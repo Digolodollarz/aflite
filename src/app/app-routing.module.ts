@@ -5,6 +5,7 @@ import {HomeComponent} from './home/home.component';
 import {AboutComponent} from './info/about/about.component';
 import {PrivacyComponent} from './info/privacy/privacy.component';
 import {ContactComponent} from './info/contact/contact.component';
+import {ProfileComponent} from './profile/profile.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,10 @@ const routes: Routes = [
   {
     path: 'contact',
     component: ContactComponent
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent
   },
   {
     path: '',
