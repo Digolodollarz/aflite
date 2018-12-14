@@ -2,20 +2,16 @@
   <mdb-navbar-brand><a href="/" class="navbar-brand">Africalight Foundation</a></mdb-navbar-brand>
 
   <!-- This fills the remaining space of the current row -->
-  <!--<span class="dgl-expanded"></span>-->
+  <span class="dgl-expanded"></span>
 
   <links>
     <div class="navbar-nav">
-      <span class="nav-item nav-link">{{user?.firstName}}</span>
-      <a class="nav-item nav-link active waves-light" href="#" mdbWavesEffect>Home <span
-        class="sr-only">(current)</span></a>
-      <a class="nav-item nav-link waves-light" href="#" mdbWavesEffect>Features</a>
-      <a class="nav-item nav-link waves-light" *ngIf="!user" href="login" mdbWavesEffect>Login</a>
-      <a class="nav-item nav-link waves-light" *ngIf="user" (click)="logout()" mdbWavesEffect>Log out</a>
-      <a class="nav-item nav-link disabled" href="#">Disabled</a>
+      <a class="nav-item nav-link waves-light" routerLink="/about" mdbWavesEffect>About</a>
+      <a class="nav-item nav-link waves-light" routerLink="/contact" mdbWavesEffect>Contact</a>
+      <a class="nav-item nav-link waves-light" *ngIf="!user" routerLink="/login" mdbWavesEffect>Login</a>
+      <a class="nav-item nav-link waves-light" *ngIf="user" (click)="logout()" mdbWavesEffect>Log out {{user?.firstName}}</a>
     </div>
   </links>
-
 </mdb-navbar>
 
 <router-outlet></router-outlet>
@@ -55,16 +51,16 @@
 
         <ul class="list-unstyled">
           <li>
-            <a href="#!">Incubation</a>
+            <a routerLink="/incubator">Incubation</a>
           </li>
           <li>
-            <a href="#!">Showcase</a>
+            <a routerLink="/showcase">Showcase</a>
           </li>
           <li>
-            <a href="#!">Artists</a>
+            <a routerLink="/artists">Artists</a>
           </li>
           <li>
-            <a *ngIf="user == null" href="/login">Login</a>
+            <a *ngIf="user == null" routerLink="/login">Login</a>
             <a *ngIf="user != null" (click)="logout()">Log out</a>
           </li>
         </ul>
@@ -80,16 +76,16 @@
 
         <ul class="list-unstyled">
           <li>
-            <a href="/contact">Contact us</a>
+            <a routerLink="/contact">Contact us</a>
           </li>
           <li>
-            <a href="/about">About Us</a>
+            <a routerLink="/about">About Us</a>
           </li>
           <li>
-            <a href="/privacy">Privacy</a>
+            <a routerLink="/privacy">Privacy</a>
           </li>
           <li>
-            <a href="#!">Stoff</a>
+            <a routerLink="#!">Stoff</a>
           </li>
         </ul>
 

@@ -13,11 +13,13 @@ import {ErrorInterceptor} from './_helpers/error-interceptor';
 import { HomeComponent } from './home/home.component';
 import {InfoModule} from './info/info.module';
 import {MDBBootstrapModule} from 'angular-bootstrap-md';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
