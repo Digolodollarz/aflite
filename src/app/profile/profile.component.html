@@ -1,16 +1,19 @@
 <div class="page-container full-bg-img">
   <div class="container">
-    <p>Profile Is Kinda Working</p>
+    <p>{{user?.firstName + user?.lastName}} Profile Is Kinda Working</p>
   </div>
+  <div class="row container-fluid">
+    <nav class="nav flex-column" style="width: 128px;">
+      <a class="nav-link active" routerLink="videos">Video pitch</a>
+      <a class="nav-link" routerLink="songs">Songs samples</a>
+      <a class="nav-link" routerLink="practice">Practice</a>
+      <a class="nav-link" routerLink="reading">Reading</a>
+      <a class="nav-link" routerLink="mentoring">Mentoring</a>
+      <a class="nav-link" routerLink="meeting">Meeting</a>
+      <a class="nav-link" routerLink="learn">Learn</a>
+      <a class="nav-link" routerLink="producer">Producer</a>
+    </nav>
 
-  <nav class="nav flex-column">
-    <a class="nav-link active" routerLink="#">Video pitch</a>
-    <a class="nav-link" routerLink="#">Songs samples</a>
-    <a class="nav-link" routerLink="#">Practice</a>
-    <a class="nav-link" routerLink="#">Reading</a>
-    <a class="nav-link" routerLink="#">Mentoring</a>
-    <a class="nav-link" routerLink="#">Meeting</a>
-    <a class="nav-link" routerLink="#">Learn</a>
-    <a class="nav-link" routerLink="#">Producer</a>
-  </nav>
+    <router-outlet></router-outlet>
+  </div>
 </div>

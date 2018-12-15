@@ -15,6 +15,15 @@ import {InfoModule} from './info/info.module';
 import {MDBBootstrapModule} from 'angular-bootstrap-md';
 import { ProfileComponent } from './profile/profile.component';
 import { ArtistComponent } from './profile/artist/artist.component';
+import { VideosComponent } from './profile/videos/videos.component';
+import { SongsComponent } from './profile/songs/songs.component';
+import { PracticeComponent } from './profile/practice/practice.component';
+import { ReadingComponent } from './profile/reading/reading.component';
+import { MentoringComponent } from './profile/mentoring/mentoring.component';
+import { MeetingComponent } from './profile/meeting/meeting.component';
+import { LearnComponent } from './profile/learn/learn.component';
+import { ProducerComponent } from './profile/producer/producer.component';
+import { ProducersComponent } from './profile/producers/producers.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +31,15 @@ import { ArtistComponent } from './profile/artist/artist.component';
     HomeComponent,
     ProfileComponent,
     ArtistComponent,
+    VideosComponent,
+    SongsComponent,
+    PracticeComponent,
+    ReadingComponent,
+    MentoringComponent,
+    MeetingComponent,
+    LearnComponent,
+    ProducerComponent,
+    ProducersComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

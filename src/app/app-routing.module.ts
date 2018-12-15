@@ -6,6 +6,14 @@ import {AboutComponent} from './info/about/about.component';
 import {PrivacyComponent} from './info/privacy/privacy.component';
 import {ContactComponent} from './info/contact/contact.component';
 import {ProfileComponent} from './profile/profile.component';
+import {LearnComponent} from './profile/learn/learn.component';
+import {MeetingComponent} from './profile/meeting/meeting.component';
+import {MentoringComponent} from './profile/mentoring/mentoring.component';
+import {PracticeComponent} from './profile/practice/practice.component';
+import {ReadingComponent} from './profile/reading/reading.component';
+import {SongsComponent} from './profile/songs/songs.component';
+import {VideosComponent} from './profile/videos/videos.component';
+import {ProducersComponent} from './profile/producers/producers.component';
 
 const routes: Routes = [
   {
@@ -25,8 +33,42 @@ const routes: Routes = [
     component: ContactComponent
   },
   {
-    path: 'profile',
-    component: ProfileComponent
+    path: 'dashboard',
+    component: ProfileComponent,
+    children: [
+      {
+        path: 'learn',
+        component: LearnComponent,
+      },
+      {
+        path: 'meeting',
+        component: MeetingComponent,
+      },
+      {
+        path: 'mentoring',
+        component: MentoringComponent,
+      },
+      {
+        path: 'practice',
+        component: PracticeComponent,
+      },
+      {
+        path: 'reading',
+        component: ReadingComponent,
+      },
+      {
+        path: 'songs',
+        component: SongsComponent,
+      },
+      {
+        path: 'videos',
+        component: VideosComponent,
+      },
+      {
+        path: 'producer',
+        component: ProducersComponent,
+      },
+    ]
   },
   {
     path: '',
