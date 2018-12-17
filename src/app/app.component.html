@@ -7,9 +7,11 @@
   <links>
     <div class="navbar-nav">
       <a class="nav-item nav-link waves-light" routerLink="/about" mdbWavesEffect>About</a>
+      <a class="nav-item nav-link waves-light" routerLink="/dashboard" mdbWavesEffect>Dashboard</a>
       <a class="nav-item nav-link waves-light" routerLink="/contact" mdbWavesEffect>Contact</a>
       <a class="nav-item nav-link waves-light" *ngIf="!user" routerLink="/login" mdbWavesEffect>Login</a>
-      <a class="nav-item nav-link waves-light" *ngIf="user" (click)="logout()" mdbWavesEffect>Log out {{user?.firstName}}</a>
+      <a class="nav-item nav-link waves-light" *ngIf="user" (click)="logout()" mdbWavesEffect>Log out
+        {{user?.firstName}}</a>
     </div>
   </links>
 </mdb-navbar>
@@ -100,7 +102,7 @@
 
   <!-- Copyright -->
   <div class="footer-copyright text-center py-3">© 2018 Copyright:
-    <a href="https://mdbootstrap.com/education/angular/"> MDBootstrap.com</a>
+    <a href="https://africalight.org/">Africalight Foundation</a>
   </div>
   <!-- Copyright -->
 

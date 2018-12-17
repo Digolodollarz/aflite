@@ -10,20 +10,21 @@ import {AuthModule} from './auth/auth.module';
 import {fakeBackendProvider} from './_helpers/fack-backend';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {ErrorInterceptor} from './_helpers/error-interceptor';
-import { HomeComponent } from './home/home.component';
+import {HomeComponent} from './home/home.component';
 import {InfoModule} from './info/info.module';
 import {MDBBootstrapModule} from 'angular-bootstrap-md';
-import { ProfileComponent } from './profile/profile.component';
-import { ArtistComponent } from './profile/artist/artist.component';
-import { VideosComponent } from './profile/videos/videos.component';
-import { SongsComponent } from './profile/songs/songs.component';
-import { PracticeComponent } from './profile/practice/practice.component';
-import { ReadingComponent } from './profile/reading/reading.component';
-import { MentoringComponent } from './profile/mentoring/mentoring.component';
-import { MeetingComponent } from './profile/meeting/meeting.component';
-import { LearnComponent } from './profile/learn/learn.component';
-import { ProducerComponent } from './profile/producer/producer.component';
-import { ProducersComponent } from './profile/producers/producers.component';
+import {ProfileComponent} from './profile/profile.component';
+import {ArtistComponent} from './profile/artist/artist.component';
+import {VideosComponent} from './profile/videos/videos.component';
+import {SongsComponent} from './profile/songs/songs.component';
+import {PracticeComponent} from './profile/practice/practice.component';
+import {ReadingComponent} from './profile/reading/reading.component';
+import {MentoringComponent} from './profile/mentoring/mentoring.component';
+import {MeetingComponent} from './profile/meeting/meeting.component';
+import {LearnComponent} from './profile/learn/learn.component';
+import {ProducerComponent} from './profile/producer/producer.component';
+import {ProducersComponent} from './profile/producers/producers.component';
+import {AddSongModalComponent} from './profile/songs/add-song-modal/add-song-modal.component';
 
 @NgModule({
   declarations: [
@@ -40,9 +41,10 @@ import { ProducersComponent } from './profile/producers/producers.component';
     LearnComponent,
     ProducerComponent,
     ProducersComponent,
+    AddSongModalComponent,
   ],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'serverApp' }),
+    BrowserModule.withServerTransition({appId: 'serverApp'}),
     AppRoutingModule,
     BrowserAnimationsModule,
     ImportsModule,
@@ -50,8 +52,11 @@ import { ProducersComponent } from './profile/producers/producers.component';
     AuthModule,
     InfoModule,
   ],
-  providers: [fakeBackendProvider,
-    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}],
+  entryComponents: [AddSongModalComponent],
+  providers: [
+    fakeBackendProvider,
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

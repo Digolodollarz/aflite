@@ -1,3 +1,23 @@
-<p>
-  songs works!
-</p>
+<div class="">
+  <div class="card-deck">
+    <mdb-card *ngFor="let song of songs">
+      <mdb-card-img [src]="song.thumbUrl"></mdb-card-img>
+      <mdb-card-body>
+        <mdb-card-title><h5>{{song.title}}</h5></mdb-card-title>
+        <p>Produced by: {{song.producer.lastName}}</p>
+        <p>Length: {{song.producer}}</p>
+        <p>Date: {{song.date}}</p>
+      </mdb-card-body>
+      <mdb-card-footer>
+        <a mdbBtn color="primary" routerLink="/songs/{{song.id}}">View</a>
+        <a mdbBtn color="secondary" (click)="editSong(song)">Edit</a>
+      </mdb-card-footer>
+    </mdb-card>
+  </div>
+
+  <div class="add-song">
+    <button type="button" mdbBtn color="primary" class="relative waves-light" (click)="createSong()"
+            mdbWavesEffect>Add Song
+    </button>
+  </div>
+</div>

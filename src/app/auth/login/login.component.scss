@@ -1,10 +1,9 @@
 .login-page {
-  height: calc(100% - 64px);
+  min-height: calc(100% - 372px);
 }
 
 .login-container {
-  width: 960px;
-  height: 680px;
+  max-width: 960px;
 }
 
 .login-form-container{

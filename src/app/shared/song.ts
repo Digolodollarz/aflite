@@ -7,4 +7,5 @@ export class Song {
   artist?: User;
   producer?: User;
   fileUrl?: string;
+  thumbUrl?: string;
 }
