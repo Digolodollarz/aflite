@@ -25,6 +25,7 @@ import {LearnComponent} from './profile/learn/learn.component';
 import {ProducerComponent} from './profile/producer/producer.component';
 import {ProducersComponent} from './profile/producers/producers.component';
 import {AddSongModalComponent} from './profile/songs/add-song-modal/add-song-modal.component';
+import { IncubationComponent } from './incubation/incubation.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import {AddSongModalComponent} from './profile/songs/add-song-modal/add-song-mod
     ProducerComponent,
     ProducersComponent,
     AddSongModalComponent,
+    IncubationComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'serverApp'}),
