@@ -25,7 +25,9 @@ import {LearnComponent} from './profile/learn/learn.component';
 import {ProducerComponent} from './profile/producer/producer.component';
 import {ProducersComponent} from './profile/producers/producers.component';
 import {AddSongModalComponent} from './profile/songs/add-song-modal/add-song-modal.component';
-import { IncubationComponent } from './incubation/incubation.component';
+import {IncubationComponent} from './incubation/incubation.component';
+import {IncubationService} from './incubation/incubation.service';
+import { IncubatorComponent } from './incubation/incubator/incubator.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +46,7 @@ import { IncubationComponent } from './incubation/incubation.component';
     ProducersComponent,
     AddSongModalComponent,
     IncubationComponent,
+    IncubatorComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'serverApp'}),
@@ -58,6 +61,7 @@ import { IncubationComponent } from './incubation/incubation.component';
   providers: [
     fakeBackendProvider,
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
+    IncubationService
   ],
   bootstrap: [AppComponent]
 })

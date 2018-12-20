@@ -1,0 +1,22 @@
+<div class="container-fluid">
+  <div class="section">
+    <div class="container">
+      <h1 class="my-5">Incubators</h1>
+    </div>
+  </div>
+  <div class="section">
+    <div class="container">
+      <div class="row">
+        <div *ngFor="let incubator of incubators" class="col-12 col-md-6 col-lg-4 my-3">
+          <img [src]="incubator.photoUrl" [alt]="incubator.name" class="rounded img-fluid z-depth-1">
+          <h3 class="my-3">{{incubator.name}}</h3>
+          <h5>Ma Banana. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusantium asperiores aspernatur
+            assumenda beatae distinctio dolorem eligendi eos error, fugiat ipsam mollitia non nulla provident quibusdam
+            ratione reprehenderit suscipit voluptatum?</h5>
+          <a routerLink="{{incubator.id}}" mdbBtn color="primary" mdbWavesEffect size="sm">More</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button (click)="add()">Add</button>
+</div>

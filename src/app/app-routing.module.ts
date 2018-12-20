@@ -15,6 +15,7 @@ import {SongsComponent} from './profile/songs/songs.component';
 import {VideosComponent} from './profile/videos/videos.component';
 import {ProducersComponent} from './profile/producers/producers.component';
 import {TeamComponent} from './info/team/team.component';
+import {IncubationComponent} from './incubation/incubation.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,10 @@ const routes: Routes = [
   {
     path: 'team',
     component: TeamComponent
+  },
+  {
+    path: 'incubation',
+    component: IncubationComponent
   },
   {
     path: 'dashboard',
