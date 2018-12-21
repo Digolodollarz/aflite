@@ -10,7 +10,7 @@ import {MeetingService} from '../meeting.service';
 })
 export class MeetingDetailComponent implements OnInit {
   meeting: Meeting;
-  mId: number;
+  mId: any;
 
   constructor(private route: ActivatedRoute,
               private service: MeetingService) {
