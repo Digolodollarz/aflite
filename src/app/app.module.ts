@@ -27,7 +27,9 @@ import {ProducersComponent} from './profile/producers/producers.component';
 import {AddSongModalComponent} from './profile/songs/add-song-modal/add-song-modal.component';
 import {IncubationComponent} from './incubation/incubation.component';
 import {IncubationService} from './incubation/incubation.service';
-import { IncubatorComponent } from './incubation/incubator/incubator.component';
+import {IncubatorComponent} from './incubation/incubator/incubator.component';
+import {MeetingDetailComponent} from './profile/meeting/meeting-detail/meeting-detail.component';
+import {MeetingService} from './profile/meeting/meeting.service';
 
 @NgModule({
   declarations: [
@@ -47,6 +49,7 @@ import { IncubatorComponent } from './incubation/incubator/incubator.component';
     AddSongModalComponent,
     IncubationComponent,
     IncubatorComponent,
+    MeetingDetailComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'serverApp'}),
@@ -61,7 +64,8 @@ import { IncubatorComponent } from './incubation/incubator/incubator.component';
   providers: [
     fakeBackendProvider,
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
-    IncubationService
+    IncubationService,
+    MeetingService,
   ],
   bootstrap: [AppComponent]
 })

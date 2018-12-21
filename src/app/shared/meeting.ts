@@ -3,11 +3,13 @@ import {User} from '../auth/user';
 export class Meeting {
   id: number;
   agenda: string;
+  venue?: string;
   date?: Date;
   startTime?: Date;
   endTime?: Date;
   chair?: User;
-  typeId?: number;
+  type?: string;
+  attendats?: User[];
 }
 
 export enum MeetingType {

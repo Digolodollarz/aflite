@@ -16,6 +16,7 @@ import {VideosComponent} from './profile/videos/videos.component';
 import {ProducersComponent} from './profile/producers/producers.component';
 import {TeamComponent} from './info/team/team.component';
 import {IncubationComponent} from './incubation/incubation.component';
+import {MeetingDetailComponent} from './profile/meeting/meeting-detail/meeting-detail.component';
 
 const routes: Routes = [
   {
@@ -51,8 +52,12 @@ const routes: Routes = [
         component: LearnComponent,
       },
       {
-        path: 'meeting',
+        path: 'meetings',
         component: MeetingComponent,
+      },
+      {
+        path: 'meetings/:id',
+        component: MeetingDetailComponent,
       },
       {
         path: 'mentoring',

@@ -4,6 +4,7 @@ import {Observable, of, throwError} from 'rxjs';
 import {delay, mergeMap, materialize, dematerialize} from 'rxjs/operators';
 import {User} from '../auth/user';
 import {Incubator} from '../shared/incubator';
+import {Meeting} from '../shared/meeting';
 
 
 @Injectable()
@@ -17,10 +18,63 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
     const incubators: Incubator[] = [
       {id: 1, name: 'John Nkomo IRL', photoUrl: '/assets/img/card.jpg'},
-      {id: 1, name: 'James le Doug', photoUrl: '/assets/img/card.jpg'},
-      {id: 1, name: 'David la-Grange', photoUrl: '/assets/img/card.jpg'},
-      {id: 1, name: 'Romain daVinci', photoUrl: '/assets/img/card.jpg'},
-      {id: 1, name: 'Martin Luther King', photoUrl: '/assets/img/card.jpg'},
+      {id: 2, name: 'James le Doug', photoUrl: '/assets/img/card.jpg'},
+      {id: 3, name: 'David la-Grange', photoUrl: '/assets/img/card.jpg'},
+      {id: 4, name: 'Romain daVinci', photoUrl: '/assets/img/card.jpg'},
+      {id: 5, name: 'Martin Luther King', photoUrl: '/assets/img/card.jpg'},
+    ];
+
+    const meetings: Meeting[] = [
+      {
+        id: 1,
+        agenda: 'To be or not to be',
+        venue: 'virtual',
+        date: new Date('26 Dec 18'),
+        startTime: new Date('11 Dec 2018 09:00'),
+        endTime: new Date('11 Dec 2018 15:00'),
+        type: 'CEO_CEO',
+        chair: users[1]
+      },
+      {
+        id: 2,
+        agenda: 'Deliberating on the implementation of the thing',
+        venue: 'virtual',
+        date: new Date('26 Dec 18'),
+        startTime: new Date('11 Dec 2018 09:00'),
+        endTime: new Date('11 Dec 2018 15:00'),
+        type: 'CEO_CEO',
+        chair: users[1]
+      },
+      {
+        id: 3,
+        agenda: 'A new meeting to be seen',
+        venue: 'virtual',
+        date: new Date('26 Dec 18'),
+        startTime: new Date('11 Dec 2018 09:00'),
+        endTime: new Date('11 Dec 2018 15:00'),
+        type: 'CEO_CEO',
+        chair: users[1]
+      },
+      {
+        id: 4,
+        agenda: 'The first meeting to decide on what to actually do',
+        venue: 'virtual',
+        date: new Date('26 Dec 18'),
+        startTime: new Date('11 Dec 2018 09:00'),
+        endTime: new Date('11 Dec 2018 15:00'),
+        type: 'CEO_CEO',
+        chair: users[1]
+      },
+      {
+        id: 5,
+        agenda: 'Hmm, this is a lorem meeting',
+        venue: 'virtual',
+        date: new Date('26 Dec 18'),
+        startTime: new Date('11 Dec 2018 09:00'),
+        endTime: new Date('11 Dec 2018 15:00'),
+        type: 'CEO_CEO',
+        chair: users[1]
+      },
     ];
 
     const authHeader = request.headers.get('Authorization');
@@ -71,6 +125,22 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         return ok(incubator);
       }
 
+
+      // get all meetings
+      if (request.url.endsWith('/meetings') && request.method === 'GET') {
+        if (!isLoggedIn) {
+          return unauthorised();
+        }
+        return ok(meetings);
+      }
+      // get a meeting
+      if (request.url.match('/meetings/\\d+') && request.method === 'GET') {
+        if (!isLoggedIn) {
+          return unauthorised();
+        }
+        const mId = request.url.substr(request.url.lastIndexOf('/') + 1);
+        return ok(meetings[mId]);
+      }
       // pass through any requests not handled above
       return next.handle(request);
     }))

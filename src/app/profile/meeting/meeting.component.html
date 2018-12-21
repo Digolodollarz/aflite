@@ -1,3 +1,15 @@
-<p>
-  meeting works!
-</p>
+<div class="">
+  <h1>Peer to Peer meetings</h1>
+
+  <div class="column">
+    <div *ngFor="let meeting of meetings" class="bg-light rounded p-2 my-2">
+      <h3>{{meeting.agenda}} {{meeting.date | date}}</h3>
+      <h5>Chair: {{meeting.chair.lastName}}</h5>
+      <h5>Venue: {{meeting.venue}}</h5>
+      <h5>Starts: {{meeting.startTime | date:"HH:mm"}} Ends: {{meeting.endTime | date:"HH:mm"}}</h5>
+      <a mdbBtn mdbWavesEffect size="sm" color="primary" routerLink="{{meeting.id}}">Details</a>
+      <button mdbBtn mdbWavesEffect size="sm" color="warning" outline="true" (click)="alert('Sit Down');">Cancel
+      </button>
+    </div>
+  </div>
+</div>
