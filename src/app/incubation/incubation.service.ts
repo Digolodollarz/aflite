@@ -12,10 +12,10 @@ export class IncubationService {
   }
 
   getIncubators(): Observable<Incubator[]> {
-    return this.http.get(`${environment.apiUrl}/incubators`);
+    return this.http.get<Incubator[]>(`${environment.apiUrl}/incubators`);
   }
 
   addIncubator(incubator: Incubator): Observable<Incubator> {
-    return this.http.post(`${environment.apiUrl}/incubators`, incubator);
+    return this.http.post<Incubator>(`${environment.apiUrl}/incubators`, incubator);
   }
 }
