@@ -2,8 +2,8 @@ import {User} from '../auth/user';
 
 export class VideoPitch {
   id: number;
-  title: string;
+  title?: string;
   date?: Date;
-  artists?: User;
+  artist?: User;
   fileUrl?: string;
 }

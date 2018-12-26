@@ -1,3 +1,21 @@
-<p>
-  videos works!
-</p>
+<div class="page">
+  <div class="section">
+    <h1>Your video pitch</h1>
+  </div>
+  <div class="section">
+    <div class="video">
+      <div *ngIf="currentVideo" class="embed-responsive embed-responsive-16by9">
+        <iframe class="embed-responsive-item" [src]="currentVideoSafeUrl" frameborder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+      </div>
+
+      <h5 *ngIf="currentVideo">To change you video pitch, please enter new YouTube video URL below</h5>
+      <h5 *ngIf="!currentVideo">To add you video pitch, please enter new YouTube video URL below</h5>
+      <div class="md-form">
+        <input [(ngModel)]="newVideo.fileUrl" mdbInputDirective type="text" id="form1" class="form-control">
+      </div>
+      <button (click)="setVideo()">Update</button>
+    </div>
+  </div>
+</div>

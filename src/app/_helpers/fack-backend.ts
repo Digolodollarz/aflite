@@ -5,18 +5,19 @@ import {delay, mergeMap, materialize, dematerialize} from 'rxjs/operators';
 import {User} from '../auth/user';
 import {Incubator} from '../shared/incubator';
 import {Meeting} from '../shared/meeting';
+import {VideoPitch} from '../shared/video-pitch';
 
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const users: User[] = [
+    const defaultUsers: User[] = [
       {id: 1, username: 'test', password: 'test', firstName: 'Test', lastName: 'User'},
       {id: 2, username: 'admin', password: 'admin', firstName: 'Admin', lastName: 'User'},
       {id: 3, username: 'N01310389L', password: '210117483', firstName: 'Edmore M', lastName: 'Gonese'},
     ];
 
-    const incubators: Incubator[] = [
+    const defaultIncubators: Incubator[] = [
       {id: 1, name: 'John Nkomo IRL', photoUrl: '/assets/img/card.jpg'},
       {id: 2, name: 'James le Doug', photoUrl: '/assets/img/card.jpg'},
       {id: 3, name: 'David la-Grange', photoUrl: '/assets/img/card.jpg'},
@@ -24,7 +25,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       {id: 5, name: 'Martin Luther King', photoUrl: '/assets/img/card.jpg'},
     ];
 
-    const meetings: Meeting[] = [
+    const defaultMeetings: Meeting[] = [
       {
         id: 1,
         agenda: 'To be or not to be',
@@ -33,7 +34,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         startTime: new Date('11 Dec 2018 09:00'),
         endTime: new Date('11 Dec 2018 15:00'),
         type: 'CEO_CEO',
-        chair: users[1]
+        chair: defaultUsers[1]
       },
       {
         id: 2,
@@ -43,7 +44,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         startTime: new Date('11 Dec 2018 09:00'),
         endTime: new Date('11 Dec 2018 15:00'),
         type: 'CEO_CEO',
-        chair: users[1]
+        chair: defaultUsers[1]
       },
       {
         id: 3,
@@ -53,7 +54,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         startTime: new Date('11 Dec 2018 09:00'),
         endTime: new Date('11 Dec 2018 15:00'),
         type: 'CEO_CEO',
-        chair: users[1]
+        chair: defaultUsers[1]
       },
       {
         id: 4,
@@ -63,7 +64,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         startTime: new Date('11 Dec 2018 09:00'),
         endTime: new Date('11 Dec 2018 15:00'),
         type: 'CEO_CEO',
-        chair: users[1]
+        chair: defaultUsers[1]
       },
       {
         id: 5,
@@ -73,9 +74,16 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         startTime: new Date('11 Dec 2018 09:00'),
         endTime: new Date('11 Dec 2018 15:00'),
         type: 'CEO_CEO',
-        chair: users[1]
+        chair: defaultUsers[1]
       },
     ];
+
+    const defaultVideos: VideoPitch[] =
+      [
+        {id: 0, artist: defaultUsers[0], fileUrl: 'https://www.youtube.com/embed/eZsxXJy6_sY'},
+        {id: 1, artist: defaultUsers[1], fileUrl: 'https://www.youtube.com/embed/eZsxXJy6_sY'},
+        {id: 2, artist: defaultUsers[2], fileUrl: 'https://www.youtube.com/embed/eZsxXJy6_sY'},
+      ];
 
     const authHeader = request.headers.get('Authorization');
     const isLoggedIn = authHeader && authHeader.startsWith('Bearer fake-jwt-token');
@@ -85,6 +93,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
       // authenticate - public
       if (request.url.endsWith('/users/authenticate') && request.method === 'POST') {
+        const users = JSON.parse(localStorage.getItem('users')) || defaultUsers;
         const user = users.find(x => x.username === request.body.username && x.password === request.body.password);
         if (!user) {
           return error('Username or password is incorrect');
@@ -103,15 +112,16 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         if (!isLoggedIn) {
           return unauthorised();
         }
+        const users = JSON.parse(localStorage.getItem('users')) || defaultUsers;
         return ok(users);
       }
-
 
       // get all incubators
       if (request.url.endsWith('/incubators') && request.method === 'GET') {
         if (!isLoggedIn) {
           return unauthorised();
         }
+        const incubators = JSON.parse(localStorage.getItem('incubators')) || defaultIncubators;
         return ok(incubators);
       }
       // add incubator
@@ -120,8 +130,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
           return unauthorised();
         }
         const incubator: Incubator = request.body;
+        const incubators = JSON.parse(localStorage.getItem('incubators')) || defaultIncubators;
         incubator.id = incubators.length + 1;
         incubators.push(incubator);
+        localStorage.setItem('incubators', incubators);
         return ok(incubator);
       }
 
@@ -131,6 +143,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         if (!isLoggedIn) {
           return unauthorised();
         }
+        const meetings = JSON.parse(localStorage.getItem('meetings')) || defaultMeetings;
         return ok(meetings);
       }
       // get a meeting
@@ -139,10 +152,53 @@ export class FakeBackendInterceptor implements HttpInterceptor {
           return unauthorised();
         }
         const mId = request.url.substr(request.url.lastIndexOf('/') + 1);
+        const meetings = JSON.parse(localStorage.getItem('meetings')) || defaultMeetings;
         return ok(meetings[mId]);
       }
+
+      // Videos Tings
+      if (request.url.endsWith('/videos/pitch') && request.method === 'GET') {
+        if (!isLoggedIn) {
+          return unauthorised();
+        }
+        const userId = request.url.substring(request.url.lastIndexOf('users/') + 6, request.url.lastIndexOf('/videos'));
+        const videos = JSON.parse(localStorage.getItem('videos')) || defaultVideos;
+        return ok(videos[userId - 1]);
+      }
+      if (request.url.endsWith('/videos/pitch') && request.method === 'POST') {
+        if (!isLoggedIn) {
+          return unauthorised();
+        }
+        const userId = request.url.substring(request.url.lastIndexOf('users/') + 6, request.url.lastIndexOf('/videos'));
+        const userIdInt = Number.parseInt(userId, 10);
+        let videos = JSON.parse(localStorage.getItem('videos')) || defaultVideos;
+        const exists = videos.some(_pitch => _pitch.artist.id === userIdInt);
+        if (exists) {
+          videos = videos.map(_video => {
+            if (_video.artist.id === userIdInt) {
+              _video.date = Date();
+              _video.fileUrl = request.body.fileUrl;
+              _video.title = request.body.title;
+              console.log('That was old');
+              return _video;
+            } else {
+              return _video;
+            }
+          });
+        } else {
+          const users: User[] = JSON.parse(localStorage.getItem('users')) || defaultUsers;
+          const video: VideoPitch = request.body;
+          video.artist = users.find(_user => _user.id === userIdInt);
+          videos.push(video);
+          console.log('THat was new');
+        }
+        localStorage.setItem('videos', JSON.stringify(videos));
+        return ok(videos.find(_video => _video.artist.id === userIdInt));
+      }
+
       // pass through any requests not handled above
       return next.handle(request);
+
     }))
     // call materialize and dematerialize to ensure delay even if an error
     // is thrown (https://github.com/Reactive-Extensions/RxJS/issues/648)
