@@ -3,16 +3,49 @@
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
       <span aria-hidden="true">×</span>
     </button>
-    <h4 class="modal-title w-100" id="myModalLabel">{{creating?'Add Song':'Edit song'}}</h4>
+    <h4 class="modal-title w-100" id="myModalLabel">{{creating?'Add Song':'Edit song '+song.title}}</h4>
   </div>
   <div class="modal-body">
-    {{song?.title}}
+    <form #songForm="ngForm">
+      <div class="md-form">
+        <input mdbInputDirective type="text" name="song.title" [(ngModel)]="song.title" id="title" class="form-control">
+        <label for="title" class="">Song Title</label>
+      </div>
+      <div class="md-form">
+        <input mdbInputDirective type="text" name="song.date" [(ngModel)]="song.date" id="date" class="form-control">
+        <label for="date" class="">Date</label>
+      </div>
+      <div class="md-form">
+        <span>Artist</span>
+        <select class="browser-default custom-select" [(ngModel)]="song.artist" name="song.artist" id="artist">
+          <option selected>Pick artist</option>
+          <option *ngFor="let artist of artists" [ngValue]="artist">{{artist.firstName}} {{artist.lastName}}</option>
+        </select>
+      </div>
+      <div class="md-form">
+        <span>Producer</span>
+        <select class="browser-default custom-select" [(ngModel)]="song.producer" name="song.producer" id="producer">
+          <option >Pick producer</option>
+          <option *ngFor="let artist of artists" [ngValue]="artist">{{artist.firstName}} {{artist.lastName}}</option>
+        </select>
+      </div>
+      <div class="md-form">
+        <input mdbInputDirective type="text" name="song.fileUrl" [(ngModel)]="song.fileUrl" id="fileUrl"
+               class="form-control">
+        <label for="fileUrl" class="">File</label>
+      </div>
+      <div class="md-form">
+        <input mdbInputDirective type="text" name="song.thumbUrl" [(ngModel)]="song.thumbUrl" id="thumbnailUrl"
+               class="form-control">
+        <label for="thumbnailUrl" class="">Thumbnail</label>
+      </div>
+    </form>
   </div>
   <div class="modal-footer">
-    <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="close()"
+    <button type="button" size="sm" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="close()"
             mdbWavesEffect>Close
     </button>
-    <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect (click)="save()">
+    <button type="button" size="sm" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect (click)="save()">
       {{creating?'Save!':'Update'}}
     </button>
   </div>

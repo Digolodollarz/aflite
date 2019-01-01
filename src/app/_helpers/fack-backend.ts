@@ -6,6 +6,7 @@ import {User} from '../auth/user';
 import {Incubator} from '../shared/incubator';
 import {Meeting} from '../shared/meeting';
 import {VideoPitch} from '../shared/video-pitch';
+import {Song} from '../shared/song';
 
 
 @Injectable()
@@ -83,6 +84,100 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         {id: 0, artist: defaultUsers[0], fileUrl: 'https://www.youtube.com/embed/eZsxXJy6_sY'},
         {id: 1, artist: defaultUsers[1], fileUrl: 'https://www.youtube.com/embed/eZsxXJy6_sY'},
         {id: 2, artist: defaultUsers[2], fileUrl: 'https://www.youtube.com/embed/eZsxXJy6_sY'},
+      ];
+
+    const defaultSongs: Song[] =
+      [
+        {
+          id: 0,
+          title: 'Song',
+          artist: defaultUsers[0],
+          producer: defaultUsers[0],
+          date: new Date(),
+          fileUrl: '',
+          thumbUrl: '/assets/img/bmw.jpg'
+        },
+        {
+          id: 1,
+          title: 'Song 1',
+          artist: defaultUsers[1],
+          producer: defaultUsers[0],
+          date: new Date(),
+          fileUrl: '',
+          thumbUrl: '/assets/img/bmw.jpg'
+        },
+        {
+          id: 2,
+          title: 'Song 2',
+          artist: defaultUsers[2],
+          producer: defaultUsers[0],
+          date: new Date(),
+          fileUrl: '',
+          thumbUrl: '/assets/img/bmw.jpg'
+        },
+        {
+          id: 3,
+          title: 'Song 3',
+          artist: defaultUsers[3],
+          producer: defaultUsers[0],
+          date: new Date(),
+          fileUrl: '',
+          thumbUrl: '/assets/img/bmw.jpg'
+        },
+        {
+          id: 4,
+          title: 'Song 4',
+          artist: defaultUsers[4],
+          producer: defaultUsers[0],
+          date: new Date(),
+          fileUrl: '',
+          thumbUrl: '/assets/img/bmw.jpg'
+        },
+        {
+          id: 5,
+          title: 'Song 5',
+          artist: defaultUsers[5],
+          producer: defaultUsers[0],
+          date: new Date(),
+          fileUrl: '',
+          thumbUrl: '/assets/img/bmw.jpg'
+        },
+        {
+          id: 6,
+          title: 'Song 6',
+          artist: defaultUsers[6],
+          producer: defaultUsers[0],
+          date: new Date(),
+          fileUrl: '',
+          thumbUrl: '/assets/img/bmw.jpg'
+        },
+        {
+          id: 7,
+          title: 'Song 7',
+          artist: defaultUsers[7],
+          producer: defaultUsers[0],
+          date: new Date(),
+          fileUrl: '',
+          thumbUrl: '/assets/img/bmw.jpg'
+        },
+        {
+          id: 8,
+          title: 'Song 8',
+          artist: defaultUsers[8],
+          producer: defaultUsers[0],
+          date: new Date(),
+          fileUrl: '',
+          thumbUrl: '/assets/img/bmw.jpg'
+        },
+        {
+          id: 9,
+          title: 'Song 9',
+          artist: defaultUsers[9],
+          producer: defaultUsers[0],
+          date: new Date(),
+          fileUrl: '',
+          thumbUrl: '/assets/img/bmw.jpg'
+        },
       ];
 
     const authHeader = request.headers.get('Authorization');
@@ -194,6 +289,44 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         }
         localStorage.setItem('videos', JSON.stringify(videos));
         return ok(videos.find(_video => _video.artist.id === userIdInt));
+      }
+      // Songs, Trey
+      if (request.url.endsWith('/songs') && request.method === 'GET') {
+        if (!isLoggedIn) {
+          return unauthorised();
+        }
+        const songs = JSON.parse(localStorage.getItem('songs')) || defaultSongs;
+        return ok(songs);
+      }
+      if (request.url.endsWith('/songs') && request.method === 'POST') {
+        if (!isLoggedIn) {
+          return unauthorised();
+        }
+        const songs = JSON.parse(localStorage.getItem('songs')) || defaultSongs;
+        const song: Song = request.body;
+        let index = 0;
+        songs.forEach(_song => index = index > _song.id ? index : _song.id);
+        song.id = index + 1;
+        song.date = song.date || new Date();
+        songs.push(song);
+        localStorage.setItem('songs', JSON.stringify(songs));
+        return ok(songs[songs.length - 1]);
+      }
+      if (request.url.endsWith('/songs') && request.method === 'PUT') {
+        if (!isLoggedIn) {
+          return unauthorised();
+        }
+        console.log('Erndemboiz');
+        const songs = JSON.parse(localStorage.getItem('songs')) || defaultSongs;
+        const song: Song = request.body;
+        const index = songs.findIndex(_song => _song.id === song.id);
+        if (!index) {
+          error('Unknown song');
+        }
+        song.date = song.date || new Date();
+        songs[index] = song;
+        localStorage.setItem('songs', JSON.stringify(songs));
+        return ok(songs[songs.length - 1]);
       }
 
       // pass through any requests not handled above
