@@ -7,6 +7,7 @@ import {Incubator} from '../shared/incubator';
 import {Meeting} from '../shared/meeting';
 import {VideoPitch} from '../shared/video-pitch';
 import {Song} from '../shared/song';
+import {PracticeSession} from '../shared/practice-session';
 
 
 @Injectable()
@@ -84,6 +85,34 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         {id: 0, artist: defaultUsers[0], fileUrl: 'https://www.youtube.com/embed/eZsxXJy6_sY'},
         {id: 1, artist: defaultUsers[1], fileUrl: 'https://www.youtube.com/embed/eZsxXJy6_sY'},
         {id: 2, artist: defaultUsers[2], fileUrl: 'https://www.youtube.com/embed/eZsxXJy6_sY'},
+      ];
+
+    const defaultSessions: PracticeSession[] =
+      [
+        {
+          id: 0,
+          user: defaultUsers[0],
+          fileUrl: 'https://www.youtube.com/embed/eZsxXJy6_sY',
+          startTime: new Date('11 Jan 1995 11:11'),
+          location: 'Masvingo',
+          endTime: new Date('11 Jan 1995 15:00')
+        },
+        {
+          id: 1,
+          user: defaultUsers[1],
+          fileUrl: 'https://www.youtube.com/embed/eZsxXJy6_sY',
+          startTime: new Date('11 Jan 1995 11:11'),
+          location: 'Masvingo',
+          endTime: new Date('11 Jan 1995 15:00')
+        },
+        {
+          id: 2,
+          user: defaultUsers[2],
+          fileUrl: 'https://www.youtube.com/embed/eZsxXJy6_sY',
+          startTime: new Date('11 Jan 1995 11:11'),
+          location: 'Masvingo',
+          endTime: new Date('11 Jan 1995 15:00')
+        },
       ];
 
     const defaultSongs: Song[] =
@@ -249,6 +278,41 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         const mId = request.url.substr(request.url.lastIndexOf('/') + 1);
         const meetings = JSON.parse(localStorage.getItem('meetings')) || defaultMeetings;
         return ok(meetings[mId]);
+      }
+
+
+      // get all sessions
+      if (request.url.endsWith('/practice') && request.method === 'GET') {
+        if (!isLoggedIn) {
+          return unauthorised();
+        }
+        const sessions = JSON.parse(localStorage.getItem('practice')) || defaultSessions;
+        return ok(sessions);
+      }
+
+      // post new session
+      if (request.url.endsWith('/practice') && request.method === 'POST') {
+        if (!isLoggedIn) {
+          return unauthorised();
+        }
+        const sessions = JSON.parse(localStorage.getItem('practice')) || defaultSessions;
+        const session = request.body;
+        let index = 0;
+        sessions.forEach(_session => index = index > _session.id ? index : _session.id);
+        session.id = index + 1;
+        sessions.push(session);
+        localStorage.setItem('practice', JSON.stringify(sessions));
+        return ok(sessions);
+      }
+
+      // get all sessions
+      if (request.url.match('/practice/\\d+') && request.method === 'GET') {
+        if (!isLoggedIn) {
+          return unauthorised();
+        }
+        const sessionId = request.url.substr(request.url.lastIndexOf('/') + 1);
+        const sessions = JSON.parse(localStorage.getItem('practice')) || defaultSessions;
+        return ok(sessions[sessionId]);
       }
 
       // Videos Tings

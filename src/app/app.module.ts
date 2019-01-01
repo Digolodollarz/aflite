@@ -30,6 +30,7 @@ import {IncubationService} from './incubation/incubation.service';
 import {IncubatorComponent} from './incubation/incubator/incubator.component';
 import {MeetingDetailComponent} from './profile/meeting/meeting-detail/meeting-detail.component';
 import {MeetingService} from './profile/meeting/meeting.service';
+import {RecordSessionModalComponent} from './profile/practice/record-session-modal/record-session-modal.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import {MeetingService} from './profile/meeting/meeting.service';
     IncubationComponent,
     IncubatorComponent,
     MeetingDetailComponent,
+    RecordSessionModalComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'serverApp'}),
@@ -60,7 +62,7 @@ import {MeetingService} from './profile/meeting/meeting.service';
     AuthModule,
     InfoModule,
   ],
-  entryComponents: [AddSongModalComponent],
+  entryComponents: [AddSongModalComponent, RecordSessionModalComponent],
   providers: [
     fakeBackendProvider,
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},

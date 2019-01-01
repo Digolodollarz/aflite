@@ -1,3 +1,19 @@
-<p>
-  practice works!
-</p>
+<div>
+  <h1>Previous practice sessions</h1>
+  <button (click)="createSession()" mdbBtn size="sm" color="primary">Record session</button>
+  <div *ngFor="let session of sessions" class="row p-3">
+    <div class="col col-12 col-md-6 col-4">
+      <h3>{{session.startTime | date}}</h3>
+      <h5>Start time:{{session.startTime | date : 'shortTime'}}</h5>
+      <h5>End time: {{session.endTime | date : 'shortTime'}}</h5>
+      <h6>Location: {{session.location}}</h6>
+    </div>
+    <div class="col col-12 col-md-6 col-4">
+      <div *ngIf="true" class="embed-responsive embed-responsive-16by9">
+        <iframe class="embed-responsive-item" [src]="session.safeFileUrl" frameborder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+</div>

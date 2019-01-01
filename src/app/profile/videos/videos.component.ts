@@ -21,7 +21,6 @@ export class VideosComponent implements OnInit {
     this.service.getMyVideo().subscribe(video => {
       this.currentVideo = video;
       this.currentVideoSafeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.currentVideo.fileUrl);
-      console.log(this.currentVideoSafeUrl);
     });
   }
 
